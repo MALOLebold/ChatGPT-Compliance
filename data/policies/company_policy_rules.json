@@ -1,0 +1,57 @@
+{
+  "rules": [
+    {
+      "rule_id": "company-final-determination",
+      "rule_name": "Final compliance determination",
+      "policy_family": "internal_compliance_policy",
+      "description": "Flag prompts that ask the model to replace a formal compliance or audit judgment.",
+      "match_logic": {
+        "keywords": [
+          "give the final compliance determination",
+          "issue the final audit conclusion",
+          "make the compliance decision",
+          "replace the audit review"
+        ],
+        "regex": []
+      },
+      "severity": "high",
+      "report_category": "final_determination"
+    },
+    {
+      "rule_id": "company-unapproved-data-sharing",
+      "rule_name": "Unapproved data sharing",
+      "policy_family": "data_handling_policy",
+      "description": "Flag prompts that imply moving internal or regulated data into unauthorized channels.",
+      "match_logic": {
+        "keywords": [
+          "share customer pii",
+          "send this confidential file",
+          "post internal payroll data",
+          "upload employee ssns"
+        ],
+        "regex": [
+          "(confidential|internal use only).*(share|send|post|upload)"
+        ]
+      },
+      "severity": "critical",
+      "report_category": "data_sharing"
+    },
+    {
+      "rule_id": "company-risk-assessment-delegation",
+      "rule_name": "Delegated risk assessment",
+      "policy_family": "risk_management_policy",
+      "description": "Flag prompts that delegate formal risk ratings to the model.",
+      "match_logic": {
+        "keywords": [
+          "assign the official risk rating",
+          "complete the risk assessment",
+          "rate this vendor risk",
+          "decide the final control risk"
+        ],
+        "regex": []
+      },
+      "severity": "medium",
+      "report_category": "risk_assessment"
+    }
+  ]
+}

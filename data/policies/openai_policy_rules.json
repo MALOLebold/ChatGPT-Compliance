@@ -1,0 +1,61 @@
+{
+  "rules": [
+    {
+      "rule_id": "openai-disallowed-bypass-safeguards",
+      "rule_name": "Attempts to bypass safeguards",
+      "policy_family": "openai_terms_and_safety",
+      "description": "Flag requests that appear to seek evasion of safeguards, restrictions, or monitoring.",
+      "match_logic": {
+        "keywords": [
+          "bypass safety",
+          "ignore policy",
+          "evade detection",
+          "avoid moderation",
+          "disable guardrails"
+        ],
+        "regex": [
+          "ignore\\s+all\\s+previous\\s+instructions"
+        ]
+      },
+      "severity": "high",
+      "report_category": "policy_evasion"
+    },
+    {
+      "rule_id": "openai-sensitive-data-exfiltration",
+      "rule_name": "Potential sensitive data exfiltration",
+      "policy_family": "openai_terms_and_safety",
+      "description": "Flag prompts that appear to request secrets, credentials, or mass data extraction.",
+      "match_logic": {
+        "keywords": [
+          "export all customer data",
+          "dump the database",
+          "api key",
+          "password list",
+          "secret token"
+        ],
+        "regex": [
+          "(ssn|social security number|credit card)\\s+(list|dump|export)"
+        ]
+      },
+      "severity": "critical",
+      "report_category": "sensitive_data"
+    },
+    {
+      "rule_id": "openai-unauthorized-automation",
+      "rule_name": "Potential unauthorized automation",
+      "policy_family": "workspace_controls",
+      "description": "Flag prompts that suggest using the system to impersonate approval or authorization without oversight.",
+      "match_logic": {
+        "keywords": [
+          "approve this for me",
+          "pretend you are legal",
+          "sign off on this",
+          "act as the final approver"
+        ],
+        "regex": []
+      },
+      "severity": "medium",
+      "report_category": "unauthorized_approval"
+    }
+  ]
+}

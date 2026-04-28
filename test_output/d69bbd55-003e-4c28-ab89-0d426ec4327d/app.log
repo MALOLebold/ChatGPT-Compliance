@@ -1,0 +1,4 @@
+2026-04-27T14:56:54Z INFO compliance_reporting Starting compliance reporting run 581b92cf-f265-4ad7-94bd-de621a0e3fdd for weekly (2026-04-20 to 2026-04-26) via file
+2026-04-27T14:56:54Z INFO compliance_reporting Completed run 581b92cf-f265-4ad7-94bd-de621a0e3fdd. Pulled=4 inserted=4 duplicates=0 evaluated=4
+2026-04-27T14:56:54Z INFO compliance_reporting Starting compliance reporting run cd0c6d30-30a2-495f-8c74-2888c46d0104 for weekly (2026-04-20 to 2026-04-26) via file
+2026-04-27T14:56:54Z INFO compliance_reporting Completed run cd0c6d30-30a2-495f-8c74-2888c46d0104. Pulled=4 inserted=0 duplicates=4 evaluated=4

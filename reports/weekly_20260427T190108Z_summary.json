@@ -1,0 +1,39 @@
+{
+  "run_summary": {
+    "run_id": "17b8bea7-45fc-4729-bdbe-86289d0abf12",
+    "period": "weekly",
+    "start_date": "2026-04-20",
+    "end_date": "2026-04-26",
+    "source": "file",
+    "records_pulled": 4,
+    "records_inserted": 0,
+    "duplicates_skipped": 4,
+    "evaluated_records": 4,
+    "no_match_count": 1,
+    "openai_flag_count": 1,
+    "company_flag_count": 1,
+    "dual_flag_count": 1,
+    "failures": 0,
+    "detail_report_path": "reports\\weekly_20260427T190108Z_detail.csv",
+    "summary_report_path": "reports\\weekly_20260427T190108Z_summary.json"
+  },
+  "summary_metrics": {
+    "total_prompts_reviewed": 4,
+    "prompts_with_no_matches": 1,
+    "prompts_flagged_for_openai_policy_review": 1,
+    "prompts_flagged_for_company_policy_review": 1,
+    "prompts_flagged_for_both": 1,
+    "counts_by_severity": {
+      "none": 1,
+      "high": 1,
+      "critical": 1,
+      "medium": 1
+    },
+    "counts_by_user": {
+      "user-001": 1,
+      "user-002": 1,
+      "user-003": 1,
+      "user-004": 1
+    }
+  }
+}

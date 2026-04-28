@@ -1,0 +1,4 @@
+2026-04-27T14:55:51Z INFO compliance_reporting Starting compliance reporting run 792b9384-26cd-4563-aae6-866a5cc74fca for weekly (2026-04-20 to 2026-04-26) via file
+2026-04-27T14:55:51Z INFO compliance_reporting Completed run 792b9384-26cd-4563-aae6-866a5cc74fca. Pulled=4 inserted=4 duplicates=0 evaluated=4
+2026-04-27T14:55:51Z INFO compliance_reporting Starting compliance reporting run 720afc91-d539-46aa-a30f-7fe27dd925b7 for weekly (2026-04-20 to 2026-04-26) via file
+2026-04-27T14:55:51Z INFO compliance_reporting Completed run 720afc91-d539-46aa-a30f-7fe27dd925b7. Pulled=4 inserted=0 duplicates=4 evaluated=4
