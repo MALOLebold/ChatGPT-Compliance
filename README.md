@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GPT Compliance Exporter
 
 Barebones Python CLI for exporting ChatGPT Enterprise Compliance Logs from `api.chatgpt.com`.
@@ -40,3 +41,7 @@ Organization IDs starting with `org-` are routed to organization-scope Complianc
 ```powershell
 py -m unittest discover
 ```
+=======
+# ChatGPT-Compliance
+Compliance API setup for ChatGPT Enterprise. 
+>>>>>>> 1a72f7cef211e0699f834f97e2fa8cee23318c95
