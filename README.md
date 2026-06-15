@@ -15,7 +15,7 @@ GPT/assistant response message records are filtered out of the saved output.
 From the project folder:
 
 ```powershell
-cd C:\Users\kkiussis\Projects\GPT_Compliance
+cd C:\Users\Username\Projects\GPT_Compliance   # This is an example path, but you would input wherever you store this project.
 ```
 
 Set the Compliance API key for the current PowerShell session:
