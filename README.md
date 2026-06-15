@@ -32,7 +32,7 @@ py -m gpt_compliance_exporter export `
   --event-type "CONVERSATION_MESSAGE" `
   --out-dir exports `
   --days 30 `
-  --limit 100 (Optional, but I would not use this)
+  --limit 100 # (Optional, but I would not use this)
 ```
 
 Organization IDs starting with `org-` are routed to organization-scope Compliance Logs. Other IDs are routed to workspace-scope logs.
