@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from .client import ComplianceClient, scope_type_for_principal
-from .extraction import extract_prompts
+from .extraction import extract_prompts, is_gpt_response_record
 
 
 @dataclass(frozen=True)
@@ -56,6 +56,8 @@ def export_logs(
     pages_fetched = 0
     log_files_listed = 0
     log_files_downloaded = 0
+    raw_records_downloaded = 0
+    gpt_response_records_filtered = 0
     raw_records_written = 0
     prompt_records_written = 0
     current_after = after
@@ -89,6 +91,11 @@ def export_logs(
                 warnings.extend(decode_warnings)
 
                 for raw_record in raw_records:
+                    raw_records_downloaded += 1
+                    if is_gpt_response_record(raw_record):
+                        gpt_response_records_filtered += 1
+                        continue
+
                     write_jsonl(raw_file, raw_record)
                     raw_records_written += 1
                     prompts = extract_prompts(raw_record, source_log_id=str(log_id))
@@ -121,6 +128,8 @@ def export_logs(
         "pages_fetched": pages_fetched,
         "log_files_listed": log_files_listed,
         "log_files_downloaded": log_files_downloaded,
+        "raw_records_downloaded": raw_records_downloaded,
+        "gpt_response_records_filtered": gpt_response_records_filtered,
         "raw_records_written": raw_records_written,
         "prompt_records_written": prompt_records_written,
         "warnings": warnings,

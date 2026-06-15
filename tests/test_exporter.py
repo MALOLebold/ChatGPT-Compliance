@@ -84,11 +84,13 @@ class ExporterTests(unittest.TestCase):
             prompt_records = [json.loads(line) for line in result.prompts_path.read_text(encoding="utf-8").splitlines()]
             manifest = json.loads(result.manifest_path.read_text(encoding="utf-8"))
 
-            self.assertEqual(len(raw_records), 2)
+            self.assertEqual(len(raw_records), 1)
             self.assertEqual(len(prompt_records), 1)
             self.assertEqual(prompt_records[0]["content"], "hello")
             self.assertEqual(manifest["scope_type"], "workspace")
-            self.assertEqual(manifest["raw_records_written"], 2)
+            self.assertEqual(manifest["raw_records_downloaded"], 2)
+            self.assertEqual(manifest["gpt_response_records_filtered"], 1)
+            self.assertEqual(manifest["raw_records_written"], 1)
             self.assertEqual(manifest["prompt_records_written"], 1)
 
 
