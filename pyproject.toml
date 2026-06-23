@@ -11,6 +11,7 @@ build-backend = "setuptools.build_meta"
 
 [project.scripts]
 gpt-compliance-exporter = "gpt_compliance_exporter.cli:main"
+gpt-compliance-pipeline = "compliance_script.run_pipeline:main"
 
 [tool.setuptools.packages.find]
-include = ["gpt_compliance_exporter*"]
+include = ["gpt_compliance_exporter*", "compliance_script*"]

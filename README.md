@@ -60,6 +60,59 @@ Scanner outputs:
 - `compliance_findings.jsonl`: flagged prompt classifications only
 - `compliance_summary.json`: scan counts and summary totals
 
+## Automated Cloud Power BI Workflow
+
+The pipeline command runs the export, scans the prompts, writes the same scanner outputs, uploads `compliance_findings.xlsx` directly to SharePoint with Microsoft Graph, and optionally triggers a Power BI semantic model refresh:
+
+```powershell
+$env:COMPLIANCE_API_KEY = "<compliance_api_key>"
+$env:MICROSOFT_TENANT_ID = "<tenant_id>"
+$env:MICROSOFT_CLIENT_ID = "<entra_app_client_id>"
+$env:MICROSOFT_CLIENT_SECRET = "<entra_app_client_secret>"
+
+py -m compliance_script.run_pipeline `
+  --principal-id "<workspace_id>" `
+  --event-type "CONVERSATION_MESSAGE" `
+  --export-dir exports `
+  --scan-out-dir compliance_script/output `
+  --sharepoint-site-url "https://<tenant>.sharepoint.com/sites/<site_name>" `
+  --sharepoint-drive-name "Documents" `
+  --sharepoint-folder "ChatGPT Compliance" `
+  --sharepoint-filename "compliance_findings.xlsx" `
+  --powerbi-workspace-id "<powerbi_workspace_id>" `
+  --powerbi-dataset-id "<powerbi_dataset_id>" `
+  --days 30 `
+  --limit 100
+```
+
+`COMPLIANCE_API_KEY` and Microsoft credentials should come from environment variables or Azure Key Vault. Do not put secrets in commands, scripts, PBIX files, or GitHub.
+
+The pipeline exits successfully even when prompts are flagged. A non-zero exit means the export, scan, SharePoint upload, or Power BI refresh failed.
+
+Power BI refresh is optional. Omit `--powerbi-workspace-id` and `--powerbi-dataset-id` if you only want to upload the workbook to SharePoint.
+
+### Required Microsoft Setup
+
+- Entra app registration with a client secret or managed identity-backed equivalent.
+- Microsoft Graph permission to write to the target SharePoint document library, such as `Sites.ReadWrite.All` or a narrower site-scoped permission approved by IT.
+- Power BI API permission `Dataset.ReadWrite.All` if using automatic refresh.
+- Power BI tenant setting that allows service principals to use Power BI APIs.
+- The Power BI report/semantic model should read from the stable SharePoint workbook path.
+
+### Azure Automation Notes
+
+- Store `COMPLIANCE_API_KEY`, `MICROSOFT_TENANT_ID`, `MICROSOFT_CLIENT_ID`, and `MICROSOFT_CLIENT_SECRET` in Azure Key Vault or Automation variables/secrets.
+- Schedule the runbook monthly or weekly.
+- Keep Azure Storage for optional archive copies if needed, but the live Power BI workbook is uploaded to SharePoint.
+
+### Power BI Setup
+
+- Store `compliance_findings.xlsx` in a restricted SharePoint folder.
+- In Power BI Desktop, connect to the SharePoint file URL instead of a local `C:\...` path.
+- Publish the PBIX to Power BI Service after the report points to the cloud workbook.
+- Prefer the pipeline's Power BI refresh trigger after a successful SharePoint upload. A scheduled Power BI refresh can remain as a fallback.
+- Do not commit live `.pbix` files unless they are confirmed sanitized; they may contain cached prompt data.
+
 ## Tests
 
 ```powershell

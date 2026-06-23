@@ -10,3 +10,4 @@ tmp*/
 
 exports/
 compliance_script/output/
+PowerBI/*.pbix
